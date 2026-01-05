@@ -1,11 +1,53 @@
-# Core dependencies for news producer
-kafka-python==2.0.2
-requests==2.31.0
-python-dotenv==1.0.0
+# Core Data Science
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
 
-# For future components
-pymongo==4.6.1
-pyspark==3.5.0
+# Data Collection
+yfinance>=0.2.18
+requests>=2.28.0
+beautifulsoup4>=4.12.0
 
-# Optional: for testing Kafka
-kafka-python-ng==2.2.0
+# Twitter Scraping (OPTIONAL - only works on Python < 3.13)
+# If you get errors, comment this out - code will use sample data
+# snscrape>=0.7.0
+
+# Traditional NLP
+vaderSentiment>=3.3.2
+textblob>=0.17.1
+
+# Advanced NLP (Transformers - OPTIONAL for better accuracy)
+# Can be skipped if installation fails - code will use VADER/TextBlob
+transformers>=4.30.0
+torch>=2.0.0
+
+# Streaming (Kafka - OPTIONAL if using simulation mode)
+kafka-python>=2.0.2
+
+# Big Data Processing (Spark - OPTIONAL if using pandas fallback)
+pyspark>=3.4.0
+
+# Spark NLP (OPTIONAL - for pre-trained models)
+# spark-nlp>=5.0.0
+
+# Storage
+pymongo>=4.3.0
+pyarrow>=12.0.0
+fastparquet>=2023.4.0
+
+# Visualization
+wordcloud>=1.9.0
+
+# Jupyter (if not already installed)
+jupyter>=1.0.0
+notebook>=6.5.0
+ipykernel>=6.22.0
+
+# ============================================================================
+# MINIMAL INSTALLATION (if you have issues):
+# pip install pandas numpy yfinance vaderSentiment textblob matplotlib seaborn plotly wordcloud pyarrow
+#
+# This will still run the full pipeline in simulation mode!
+# ============================================================================

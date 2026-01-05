@@ -1,8 +1,9 @@
 version: '3.8'
 
 services:
+  # Zookeeper - Required for Kafka
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.5.0
+    image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -10,10 +11,11 @@ services:
     ports:
       - "2181:2181"
     networks:
-      - kafka-network
+      - bigdata-network
 
+  # Kafka - Streaming Layer
   kafka:
-    image: confluentinc/cp-kafka:7.5.0
+    image: confluentinc/cp-kafka:latest
     container_name: kafka
     depends_on:
       - zookeeper
@@ -26,41 +28,43 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     networks:
-      - kafka-network
+      - bigdata-network
 
+  # MongoDB - NoSQL Storage
   mongodb:
-    image: mongo:7.0
+    image: mongo:latest
     container_name: mongodb
     ports:
       - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - mongodb_data:/data/db
     networks:
-      - kafka-network
+      - bigdata-network
 
-  kafka-ui:
-    image: provectuslabs/kafka-ui:latest
-    container_name: kafka-ui
+  # MongoDB Express - Web UI for MongoDB (Optional)
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
     depends_on:
-      - kafka
+      - mongodb
     ports:
-      - "8090:8080"
+      - "8081:8081"
     environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongodb:27017/
     networks:
-      - kafka-network
+      - bigdata-network
+
+networks:
+  bigdata-network:
+    driver: bridge
 
 volumes:
   mongodb_data:
     driver: local
-
-networks:
-  kafka-network:
-    driver: bridge
