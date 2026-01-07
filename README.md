@@ -42,7 +42,7 @@ pip install -r requirements.txt
 python -m textblob.download_corpora
 
 # Verify:
-python3 -c "import pandas, yfinance, vaderSentiment; print('✅ Packages work!')"
+python3 -c "import pandas, yfinance, vaderSentiment; print('Packages work!')"
 
 
 # STEP 3: START DOCKER SERVICES
