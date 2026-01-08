@@ -25,7 +25,7 @@ KAFKA_TOPICS = {
 }
 
 # MongoDB Configuration
-MONGO_URI = "mongodb://localhost:27017/"
+MONGO_URI = "mongodb://admin:password@localhost:27017/?authSource=admin"
 DB_NAME = "stock_sentiment_bigdata"
 
 # HDFS Configuration (or local simulation)
