@@ -9,17 +9,16 @@ This project implements a Big Data pipeline to analyze the correlation between n
 
 ### Key Features
 
-- Real-time data streaming architecture using Apache Kafka
-- Multi-source sentiment analysis (news articles and social media)
+- Data streaming architecture using Apache Kafka
+- Sentiment analysis (news articles)
 - Ensemble NLP models (VADER, TextBlob, Transformers)
 - Distributed storage (HDFS simulation + MongoDB)
 - Statistical correlation analysis
-- Interactive visualizations
+- Visualizations
 
 ### Data Sources
 
 - **News:** NewsAPI.org
-- **Social Media:** Twitter/X (web scraping) or sample data
 - **Stock Data:** Yahoo Finance API (5-year historical data)
 
 ### Technology Stack
@@ -265,10 +264,6 @@ docker logs mongodb --tail 20
 NEWS_API_KEY = "your_api_key_here"
 ```
 
-#### Twitter/X (Optional)
-
-Twitter scraping is automated via `snscrape` and requires no API key. If scraping fails, the system automatically generates sample data.
-
 ---
 
 ### Step 7: Run Jupyter Notebook
@@ -328,7 +323,7 @@ jupyter notebook
 ### Pipeline Components
 
 1. **Data Ingestion:** Kafka producers stream data from APIs
-2. **Message Queues:** Kafka topics (news_stream, tweets_stream, stock_prices)
+2. **Message Queues:** Kafka topics (news_stream, stock_prices)
 3. **Processing:** Spark (or pandas) for sentiment analysis
 4. **Storage:** HDFS (Parquet) + MongoDB (JSON documents)
 5. **Analysis:** Correlation calculations and statistical tests
