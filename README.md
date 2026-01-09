@@ -1,4 +1,4 @@
-# Stock Sentiment Analysis: News & Social Media Impact on Stock Prices
+# Stock Sentiment Analysis: News Impact on Stock Prices
 
 **Authors:** BECER Dicle, SANGA Kenn-Michael  
 
